@@ -8,9 +8,15 @@
 - [setvideoprofile](#setvideoprofile)
 - [getVideoProfile](#getvideoprofile)
 - [accept](#accept)
-- [hangup](#)
-- [refuse](#)
-- [inviteUsers](#)
+- [hangup](#hangup)
+- [refuse](#refuse)
+- [inviteUsers](#inviteusers)
+- [isMuted](#ismuted)
+- [setIsMuted](#setismuted)
+- [isSpeakerphoneEnabled](#isspeakerphoneenabled)
+- [setIsSpeakerphoneEnabled](#setIsspeakerphoneenabled)
+- [isVideoStreamEnabled](#isvideostreamenabled)
+- [setIsVideoStreamEnabled](#setIsvideostreamenabled)
 
 [Event](#event)
 
@@ -136,8 +142,6 @@ JMRTCViewController.refuse(() => {
 })
 ```
 
-
-
 ### inviteUsers
 
 邀请其他用户加入通话。
@@ -149,6 +153,54 @@ JMRTCViewController.inviteUsers(params, () => {
 }, () => {
   
 })
+```
+
+### isMuted
+
+获取静音状态。
+
+```javascript
+JMRTCViewController.isMuted((boolean) => { })
+```
+
+### setIsMuted
+
+设置静音状态。
+
+```javascript
+JMRTCViewController.setIsMuted({muted: true})
+```
+
+### isSpeakerphoneEnabled
+
+获取扬声器状态。
+
+```javascript
+JMRTCViewController.isSpeakerphoneEnabled((boolean) => { })
+```
+
+### setIsSpeakerphoneEnabled
+
+设置扬声器状态
+
+```javascript
+JMRTCViewController.setIsSpeakerphoneEnabled({speakerphoneEnabled: true})
+```
+
+### isVideoStreamEnabled
+
+获取视频流状态。
+
+```javascript
+JMRTCViewController.isVideoStreamEnabled((boolean) => { })
+```
+
+### setIsVideoStreamEnabled
+
+设置视频流状态。
+
+```javascript
+JMRTCViewController.setIsVideoStreamEnabled({videoStreamEnabled: true})
 ```
 
 

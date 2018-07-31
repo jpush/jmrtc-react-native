@@ -116,7 +116,7 @@ export default class JMRTCViewController {
     JMRTCModule.inviteUsers(params, success, fail)
   }
   /**
-   * 
+   * 获取当前状态是否静音。
    * @param {Function} callback = (boolean) => {}
    */
   static isMuted(callback) {

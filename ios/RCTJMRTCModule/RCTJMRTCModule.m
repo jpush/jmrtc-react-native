@@ -262,10 +262,6 @@ RCT_EXPORT_METHOD(inviteUsers:(NSDictionary *)params
     }];
 }
 
-//[[JMRTCClient currentCallSession] setMuted: self.isMuted];
-//[[JMRTCClient currentCallSession] setSpeakerEnabled: self.isSpeakerphoneEnabled];
-//[[JMRTCClient currentCallSession] setVideoStreamEnabled: self.isVideoStreamEnabled];
-
 RCT_EXPORT_METHOD(isMuted:(RCTResponseSenderBlock)callback) {
     callback(@[@([JMRTCClient currentCallSession].isMuted)]);
     
@@ -273,10 +269,10 @@ RCT_EXPORT_METHOD(isMuted:(RCTResponseSenderBlock)callback) {
 
 RCT_EXPORT_METHOD(setIsMuted:(RCTResponseSenderBlock)callback) {
     
-    if (!params[@"isMuted"]) {
+    if (!params[@"muted"]) {
         return;
     }
-    NSNumber *isMuted = params[@"isMuted"];
+    NSNumber *isMuted = params[@"muted"];
     [[JMRTCClient currentCallSession] setMuted: isMuted.boolValue];
 }
 
@@ -286,12 +282,12 @@ RCT_EXPORT_METHOD(isSpeakerphoneEnabled:(RCTResponseSenderBlock)callback) {
 
 RCT_EXPORT_METHOD(setIsSpeakerphoneEnabled:(RCTResponseSenderBlock)callback) {
     
-    if (!params[@"isSpeakerphoneEnabled"]) {
+    if (!params[@"speakerphoneEnabled"]) {
         return;
     }
     
-    NSNumber *isSpeakerphoneEnabled = params[@"isSpeakerphoneEnabled"];
-    [[JMRTCClient currentCallSession] setMuted: isSpeakerphoneEnabled.boolValue];
+    NSNumber *isSpeakerphoneEnabled = params[@"speakerphoneEnabled"];
+    [[JMRTCClient currentCallSession] setSpeakerEnabled: isSpeakerphoneEnabled.boolValue];
 }
 
 RCT_EXPORT_METHOD(isVideoStreamEnabled:(RCTResponseSenderBlock)callback) {
@@ -300,12 +296,12 @@ RCT_EXPORT_METHOD(isVideoStreamEnabled:(RCTResponseSenderBlock)callback) {
 
 RCT_EXPORT_METHOD(setIsVideoStreamEnabled:(RCTResponseSenderBlock)callback) {
     
-    if (!params[@"isVideoStreamEnabled"]) {
+    if (!params[@"videoStreamEnabled"]) {
         return;
     }
     
-    NSNumber *isVideoStreamEnabled = params[@"isVideoStreamEnabled"];
-    [[JMRTCClient currentCallSession] setMuted: isVideoStreamEnabled.boolValue];
+    NSNumber *isVideoStreamEnabled = params[@"videoStreamEnabled"];
+    [[JMRTCClient currentCallSession] setVideoStreamEnabled: isVideoStreamEnabled.boolValue];
 }
 
 - (JMRTCMediaType)stringToMeiaType:(NSString *)str {
