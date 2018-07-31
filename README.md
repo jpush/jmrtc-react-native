@@ -40,4 +40,4 @@ render() {
 
 ## APIs
 
-[API](documents/api_en.md)
+[API](documents/api.md)
