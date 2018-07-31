@@ -1,0 +1,5 @@
+rootProject.name = 'example'
+include ':jmessage-react-plugin'
+project(':jmessage-react-plugin').projectDir = new File(rootProject.projectDir, '../node_modules/jmessage-react-plugin/android')
+
+include ':app'

@@ -1,0 +1,6 @@
+framework module JMRTC {
+  umbrella header "JMRTC.h"
+
+  export *
+  module * { export * }
+}

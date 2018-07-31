@@ -1,0 +1,53 @@
+{
+  "name": "jmrtc-react-native",
+  "version": "1.0.0",
+  "description": "a jmrtc plugin for react native application",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jpush/jmessage-react-plugin.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "jmrtc"
+  ],
+  "author": "huminiOS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpush/jmessage-react-plugin/issues"
+  },
+  "peerDependencies": {
+    "jcore-react-native": ">= 1.1.8"
+  },
+  "rnpm": {
+    "ios": {
+      "sharedLibraries": [
+        "libz",
+        "UserNotifications",
+        "CoreTelephony",
+        "Security",
+        "CFNetwork",
+        "CoreFoundation",
+        "SystemConfiguration",
+        "Foundation",
+        "UIKit",
+        "libresolv",
+        "CoreGraphics",
+        "CoreAudio",
+        "AudioToolbox",
+        "MobileCoreServices",
+        "libsqlite3",
+        "libc++",
+        "AVFoundation",
+        "VideoToolbox",
+        "CoreMotion",
+        "CoreMedia"
+      ]
+    }
+  },
+  "homepage": "https://github.com/jpush/jmessage-react-plugin#readme",
+  "dependencies": {
+    "jmessage-react-plugin": "^2.3.9"
+  }
+}
