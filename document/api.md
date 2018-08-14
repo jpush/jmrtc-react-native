@@ -7,6 +7,7 @@
 - [setVideoView](#setvideoview)
 - [setvideoprofile](#setvideoprofile)
 - [getVideoProfile](#getvideoprofile)
+- [switchCamera](#switchcamera)
 - [accept](#accept)
 - [hangup](#hangup)
 - [refuse](#refuse)
@@ -104,6 +105,14 @@ JMRTCViewController.setvideoprofile(params)
 JMRTCViewController.getVideoProfile((res) => {
   // res =  = {profile: '240p' | '360p' | '480p' | '720p'}
 })
+```
+
+### switchCamera
+
+切换摄像头。
+
+```javascript
+JMRTCViewController.switchCamera()
 ```
 
 ### accept

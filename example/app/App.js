@@ -9,7 +9,9 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Modal,
+  Keyboard
 } from 'react-native';
 import {  JMRTCViewController,JMRTCView} from 'jmrtc-react-native'
 import JMessage from 'jmessage-react-plugin'

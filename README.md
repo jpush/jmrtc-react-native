@@ -1,5 +1,7 @@
 # JMRTC React Native Plugin
 
+![](./document/rctvideo.png)
+
 ## 安装
 
 ```shell
