@@ -180,6 +180,10 @@ RCT_EXPORT_METHOD(getVideoProfile:(RCTResponseSenderBlock)successCallback) {
     successCallback(@[@{@"profile": [self profileToString: profile]}]);
 }
 
+RCT_EXPORT_METHOD(switchCamera) {
+    [[JMRTCClient currentCallSession] switchCameraMode];
+}
+
 RCT_EXPORT_METHOD(accept:(RCTResponseSenderBlock)successCallback
                     fail:(RCTResponseSenderBlock)failCallback) {
     
@@ -267,7 +271,7 @@ RCT_EXPORT_METHOD(isMuted:(RCTResponseSenderBlock)callback) {
     
 }
 
-RCT_EXPORT_METHOD(setIsMuted:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(setIsMuted:(NSDictionary *)params) {
     
     if (!params[@"muted"]) {
         return;
@@ -280,7 +284,7 @@ RCT_EXPORT_METHOD(isSpeakerphoneEnabled:(RCTResponseSenderBlock)callback) {
     callback(@[@([JMRTCClient currentCallSession].isSpeakerphoneEnabled)]);
 }
 
-RCT_EXPORT_METHOD(setIsSpeakerphoneEnabled:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(setIsSpeakerphoneEnabled:(NSDictionary *)params) {
     
     if (!params[@"speakerphoneEnabled"]) {
         return;
@@ -294,7 +298,7 @@ RCT_EXPORT_METHOD(isVideoStreamEnabled:(RCTResponseSenderBlock)callback) {
     callback(@[@([JMRTCClient currentCallSession].isVideoStreamEnabled)]);
 }
 
-RCT_EXPORT_METHOD(setIsVideoStreamEnabled:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(setIsVideoStreamEnabled:(NSDictionary *)params) {
     
     if (!params[@"videoStreamEnabled"]) {
         return;

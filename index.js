@@ -77,6 +77,15 @@ export default class JMRTCViewController {
     JMRTCModule.getVideoProfile(callback)
   }
 
+  /**
+   * @abstract 设置视频输出的编码属性
+   * callback = (res) => {} , res = {profile: '240p' | '360p' | '480p' | '720p'}
+   */
+  static switchCamera() {
+    JMRTCModule.switchCamera()
+  }
+  
+
 
 // 实例方法
   /**
@@ -116,7 +125,7 @@ export default class JMRTCViewController {
     JMRTCModule.inviteUsers(params, success, fail)
   }
   /**
-   * 获取当前状态是否静音。
+   * 
    * @param {Function} callback = (boolean) => {}
    */
   static isMuted(callback) {
@@ -164,7 +173,7 @@ export default class JMRTCViewController {
       console.warn('函数被重复用于监听，可能会出现未预期的问题！')
     }
 
-    listeners[cb] = DeviceEventEmitter.addListener(CallReceiveInvite, map => {
+    listeners[callback] = DeviceEventEmitter.addListener(CallReceiveInvite, map => {
       callback(map)
     }) 
   }
@@ -174,7 +183,7 @@ export default class JMRTCViewController {
       console.warn('函数被重复用于监听，可能会出现未预期的问题！')
     }
 
-    listeners[cb] = DeviceEventEmitter.addListener(CallConnecting, map => {
+    listeners[callback] = DeviceEventEmitter.addListener(CallConnecting, map => {
       callback(map)
     }) 
   }
@@ -184,7 +193,7 @@ export default class JMRTCViewController {
       console.warn('函数被重复用于监听，可能会出现未预期的问题！')
     }
 
-    listeners[cb] = DeviceEventEmitter.addListener(CallConnected, map => {
+    listeners[callback] = DeviceEventEmitter.addListener(CallConnected, map => {
       callback(map)
     }) 
   }
@@ -194,7 +203,7 @@ export default class JMRTCViewController {
       console.warn('函数被重复用于监听，可能会出现未预期的问题！')
     }
 
-    listeners[cb] = DeviceEventEmitter.addListener(CallMemberJoin, map => {
+    listeners[callback] = DeviceEventEmitter.addListener(CallMemberJoin, map => {
       callback(map)
     }) 
   }
@@ -204,7 +213,7 @@ export default class JMRTCViewController {
       console.warn('函数被重复用于监听，可能会出现未预期的问题！')
     }
 
-    listeners[cb] = DeviceEventEmitter.addListener(CallDisconnect, map => {
+    listeners[callback] = DeviceEventEmitter.addListener(CallDisconnect, map => {
       callback(map)
     }) 
   }
@@ -214,7 +223,7 @@ export default class JMRTCViewController {
       console.warn('函数被重复用于监听，可能会出现未预期的问题！')
     }
 
-    listeners[cb] = DeviceEventEmitter.addListener(CallMemberLeave, map => {
+    listeners[callback] = DeviceEventEmitter.addListener(CallMemberLeave, map => {
       callback(map)
     }) 
   }
@@ -225,7 +234,7 @@ export default class JMRTCViewController {
       console.warn('函数被重复用于监听，可能会出现未预期的问题！')
     }
 
-    listeners[cb] = DeviceEventEmitter.addListener(CallOtherUserInvited, map => {
+    listeners[callback] = DeviceEventEmitter.addListener(CallOtherUserInvited, map => {
       callback(map)
     }) 
   }
@@ -235,7 +244,7 @@ export default class JMRTCViewController {
       console.warn('函数被重复用于监听，可能会出现未预期的问题！')
     }
 
-    listeners[cb] = DeviceEventEmitter.addListener(CallError, map => {
+    listeners[callback] = DeviceEventEmitter.addListener(CallError, map => {
       callback(map)
     }) 
   }
@@ -245,7 +254,7 @@ export default class JMRTCViewController {
       console.warn('函数被重复用于监听，可能会出现未预期的问题！')
     }
 
-    listeners[cb] = DeviceEventEmitter.addListener(CallUserVideoStreamEnabled, map => {
+    listeners[callback] = DeviceEventEmitter.addListener(CallUserVideoStreamEnabled, map => {
       callback(map)
     }) 
   }

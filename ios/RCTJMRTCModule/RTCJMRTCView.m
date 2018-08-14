@@ -21,6 +21,15 @@
     return self;
 }
 
+- (void)addSubview:(UIView *)view {
+    [super addSubview:view];
+    
+    if ([NSStringFromClass([view class]) isEqualToString:@"AgoraVideoRenderIosView"]) {
+        [view removeFromSuperview];
+        [self insertSubview:view atIndex:0];
+    }
+}
+
 - (void)SetVideoView:(NSNotification *) notification {
     NSDictionary *params = [notification object];
     
