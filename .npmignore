@@ -1,0 +1,6 @@
+document/
+example/
+node_modules/
+.idea/
+.gradle/
+.DS_Store
