@@ -1,6 +1,6 @@
 {
   "name": "jmrtc-react-native",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a jmrtc plugin for react native application",
   "main": "index.js",
   "repository": {
