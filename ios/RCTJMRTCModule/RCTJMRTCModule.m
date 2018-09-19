@@ -446,7 +446,8 @@ RCT_EXPORT_METHOD(setIsVideoStreamEnabled:(NSDictionary *)params) {
 
 - (void)onCallDisconnect:(JMRTCSession *)callSession disconnectReason:(JMRTCDisconnectReason)reason {
     [self.bridge.eventDispatcher sendAppEventWithName:kJMRTCCallDisconnect
-                                                 body:[callSession sessionToDictionary]];
+                                                 body:@{@"resion": [self reasonToString:reason],
+                                                        @"session": [callSession sessionToDictionary]}];
 }
 
 - (void)onCallMemberLeave:(JMSGUser *)leaveUser reason:(JMRTCDisconnectReason)reason {
