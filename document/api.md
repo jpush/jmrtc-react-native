@@ -299,8 +299,8 @@ JMRTCViewController.removeListener(handler)
 通话断开
 
 ```javascript
-const handler = (session) => {
-	
+const handler = (res) => {
+	// res =  {session: Session, reason: 'refuse' | 'hangup' | 'cancel' | 'busy' | 'networkError'}
 }
 
 //添加监听
@@ -314,7 +314,7 @@ JMRTCViewController.removeListener(handler)
 
 ```javascript
 const handler = (res) => {
-	// res = {user: userInfo, reason: string}
+	// res = {user: userInfo, reason: 'refuse' | 'hangup' | 'cancel' | 'busy' | 'networkError'}
 }
 
 //添加监听
