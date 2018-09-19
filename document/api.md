@@ -33,6 +33,10 @@
 - [CallUserVideoStreamEnabled](#calluservideostreamenabled)
 
 
+[Model](model)
+
+- [Session](session)
+
 ## Common API
 
 ### initEngine
@@ -293,8 +297,8 @@ JMRTCViewController.removeListener(handler)
 通话断开
 
 ```javascript
-const handler = (session) => {
-	
+const handler = (res) => {
+	// res =  {session: Session, reason: 'refuse' | 'hangup' | 'cancel' | 'busy' | 'networkError'}
 }
 
 //添加监听
@@ -308,7 +312,7 @@ JMRTCViewController.removeListener(handler)
 
 ```javascript
 const handler = (res) => {
-	// res = {user: userInfo, reason: string}
+	// res = {user: userInfo, reason: 'refuse' | 'hangup' | 'cancel' | 'busy' | 'networkError'}
 }
 
 //添加监听
@@ -358,3 +362,35 @@ JMRTCViewController.addCallUserVideoStreamEnabledListener(handler)
 // 移除监听
 JMRTCViewController.removeListener(handler)
 ```
+## Model
+
+### Session
+
+```json
+userModel = {
+	type: 'user',
+	username: string,           // 用户名
+	appKey: string,             // 用户所属应用的 appKey，可与 username 共同作为用户的唯一标识
+	nickname: string,           // 昵称
+	gender: string,             // 'male' / 'female' / 'unknown'
+	avatarThumbPath: string,    // 头像的缩略图地址
+	birthday: number,           // 日期的毫秒数
+	region: string,             // 地区
+	signature: string,          // 个性签名
+	address: string,            // 具体地址
+	noteName: string,           // 备注名
+	noteText: string,           // 备注信息
+	isNoDisturb: boolean,       // 是否免打扰
+	isInBlackList: boolean,     // 是否在黑名单中
+	isFriend:boolean            // 是否为好友
+}
+session = {
+ 	channelId: string,
+	mediaType: "video" | "voice",
+	inviter: userModel,
+	invitingMembers: [userModel],
+	joinedMembers: [userModel],
+	startTime: number
+}
+```
+
