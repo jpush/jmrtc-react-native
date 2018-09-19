@@ -80,9 +80,7 @@ JMRTCViewController.startCallUsers(params, () => {
 const params = {
   username: string // 注意这个 username 要和 JMRTCView 的 props.username 匹配，否则会失效
 }
-JMRTCViewController.setVideoView(params, () => {
-  
-})
+JMRTCViewController.setVideoView(params)
 ```
 
 ### setvideoprofile
@@ -94,7 +92,7 @@ const params = {
   profile: string //{profile: '240p' | '360p' | '480p' | '720p'} 视频编码属性,不调用这个接口默认是 '360p'
 }
 
-JMRTCViewController.setvideoprofile(params)
+JMRTCViewController.setVideoProfile(params)
 ```
 
 ### getVideoProfile
@@ -164,9 +162,9 @@ JMRTCViewController.inviteUsers(params, () => {
 })
 ```
 
-### isMuted
+### isMuted(ios)
 
-获取静音状态。
+(ios only) 获取静音状态。
 
 ```javascript
 JMRTCViewController.isMuted((boolean) => { })
@@ -182,7 +180,7 @@ JMRTCViewController.setIsMuted({muted: true})
 
 ### isSpeakerphoneEnabled
 
-获取扬声器状态。
+(ios only) 获取扬声器状态。
 
 ```javascript
 JMRTCViewController.isSpeakerphoneEnabled((boolean) => { })
@@ -198,7 +196,7 @@ JMRTCViewController.setIsSpeakerphoneEnabled({speakerphoneEnabled: true})
 
 ### isVideoStreamEnabled
 
-获取视频流状态。
+(ios only) 获取视频流状态。
 
 ```javascript
 JMRTCViewController.isVideoStreamEnabled((boolean) => { })
