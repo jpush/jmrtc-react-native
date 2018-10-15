@@ -10,6 +10,7 @@ import {
   View,
   TextInput,
   Alert,
+  Platform
 } from 'react-native';
 import {  JMRTCViewController} from 'jmrtc-react-native'
 import {FormButton} from './LoginPage'
@@ -35,6 +36,7 @@ export default class RTCComponent extends Component {
   componentDidMount() {
 
 
+
     // JMRTCViewController.addCallOutgoingListener()
     
     JMRTCViewController.addCallReceiveInviteListener((inviteArr) => {
@@ -54,6 +56,7 @@ export default class RTCComponent extends Component {
             this.setState({isCalling: false})  
               
         }, () => {
+            this.setState({ isCalling: false });  
             Alert.alert('hangup', 'error')
         })
         
@@ -64,6 +67,11 @@ export default class RTCComponent extends Component {
     // JMRTCViewController.addCallErrorListener(callback)
 
     // JMRTCViewController.addCallUserVideoStreamEnabledListener(callback)
+    JMRTCViewController.initEngine( (res) => {
+      console.log(JSON.stringify(res))
+    }, () => {
+
+    });
   }
 
   render() {
@@ -112,31 +120,61 @@ export default class RTCComponent extends Component {
         </RTCVideoView>
 
         <View style={styles.inputView}>
-            <TextInput
+            <TextInput style ={{flex: 1}}
                 placeholder = "输入用户名"
                 onChangeText = { (e) => { this.setState({username: e}) } }>
             </TextInput>
             <FormButton
                 title="视频"
                 onPress={ () => {
-                    JMRTCViewController.initEngine((res) => {
-                        console.log(`engine init success ${JSON.stringify(res)}`)
-                        JMRTCViewController.startCallUsers({usernames: [this.state.username], type: 'video'}, (res) => {
-                            
-                            JMRTCViewController.setVideoView({username: '0001'})
-                            JMRTCViewController.setVideoView({username: '0002'})
-                            console.log('targetUsername' + this.props.myUsername)
-                            this.setState({
-                                targetUsername: this.state.username, 
-                                isCalling: true,
-                            })
-                            
-                        }, (err) => {
-                            console.log(`startCallUsers fail ${JSON.stringify(err)}`)
-                        })
-                    }, (err) => {
-                        console.log('engine init fail')
-                    })
+                    if (Platform.OS === "android") {
+                        // JMRTCViewController.reinitEngine(
+                        // res => {
+                        //     console.log(`engine init success ${JSON.stringify(res)}`);
+                            JMRTCViewController.startCallUsers(
+                            { usernames: [this.state.username], type: "video" },
+                            res => {
+                                JMRTCViewController.setVideoView({ username: "0001" });
+                                JMRTCViewController.setVideoView({ username: "0002" });
+                                console.log("targetUsername" + this.props.myUsername);
+                                this.setState({
+                                targetUsername: this.state.username,
+                                isCalling: true
+                                });
+                            },
+                            err => {
+                                console.log(`startCallUsers fail ${JSON.stringify(err)}`);
+                            }
+                            );
+                        // },
+                        // err => {
+                        //     console.log("engine init fail");
+                        // }
+                        // );
+                    }else{
+                        JMRTCViewController.initEngine(res => {
+                            console.log(`engine init success ${JSON.stringify(res)}`);
+                            JMRTCViewController.startCallUsers({ usernames: [this.state.username], type: "video" }, res => {
+                                JMRTCViewController.setVideoView(
+                                  { username: "0001" }
+                                );
+                                JMRTCViewController.setVideoView(
+                                  { username: "0002" }
+                                );
+                                console.log("targetUsername" + this.props.myUsername);
+                                this.setState({
+                                  targetUsername: this
+                                    .state.username,
+                                  isCalling: true
+                                });
+                              }, err => {
+                                console.log(`startCallUsers fail ${JSON.stringify(err)}`);
+                              });
+                          }, err => {
+                            console.log("engine init fail");
+                          });
+                    }
+                    
 
                 } }
             />
@@ -160,7 +198,7 @@ export default class RTCComponent extends Component {
 const styles = StyleSheet.create({
     inputView: {
         margin: 10,
-        width: 200,
+        width: 300,
         flexDirection: 'row',
     },
     container: {
