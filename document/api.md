@@ -2,6 +2,7 @@
 
 [Common API](#common-api)
 - [initEngine](#initengine)
+- [reinitEngine](#reinitengine)
 - [releaseEngine](#releaseengine)
 - [startCallUsers](#startcallusers)
 - [setVideoView](#setvideoview)
@@ -42,6 +43,7 @@
 ### initEngine
 
 初始化音视频引擎，需要初始化成功回调后只能执行音视频相关操作。
+Android 调用此接口，如果必要权限没有获取到，则会触发权限申请
 
 ```javascript
 JMRTCViewController.initEngine(() => {
@@ -50,6 +52,18 @@ JMRTCViewController.initEngine(() => {
   
 })
 ```
+### reinitengine(Android only)
+
+获取权限成功以后调用此接口重新初始化引擎。
+
+```javascript
+JMRTCViewController.reinitengine(() => {
+  // 音视频引擎初始化成功，想在可以做音视频相关操作。
+}, (error) => {
+  
+})
+```
+
 
 ### releaseEngine
 
@@ -84,9 +98,7 @@ JMRTCViewController.startCallUsers(params, () => {
 const params = {
   username: string // 注意这个 username 要和 JMRTCView 的 props.username 匹配，否则会失效
 }
-JMRTCViewController.setVideoView(params, () => {
-  
-})
+JMRTCViewController.setVideoView(params)
 ```
 
 ### setvideoprofile
@@ -98,7 +110,7 @@ const params = {
   profile: string //{profile: '240p' | '360p' | '480p' | '720p'} 视频编码属性,不调用这个接口默认是 '360p'
 }
 
-JMRTCViewController.setvideoprofile(params)
+JMRTCViewController.setVideoProfile(params)
 ```
 
 ### getVideoProfile
@@ -168,9 +180,9 @@ JMRTCViewController.inviteUsers(params, () => {
 })
 ```
 
-### isMuted
+### isMuted(ios)
 
-获取静音状态。
+(ios only) 获取静音状态。
 
 ```javascript
 JMRTCViewController.isMuted((boolean) => { })
@@ -186,7 +198,7 @@ JMRTCViewController.setIsMuted({muted: true})
 
 ### isSpeakerphoneEnabled
 
-获取扬声器状态。
+(ios only) 获取扬声器状态。
 
 ```javascript
 JMRTCViewController.isSpeakerphoneEnabled((boolean) => { })
@@ -202,7 +214,7 @@ JMRTCViewController.setIsSpeakerphoneEnabled({speakerphoneEnabled: true})
 
 ### isVideoStreamEnabled
 
-获取视频流状态。
+(ios only) 获取视频流状态。
 
 ```javascript
 JMRTCViewController.isVideoStreamEnabled((boolean) => { })
@@ -254,7 +266,7 @@ JMRTCViewController.removeListener(handler)
 
 ### CallConnecting
 
-通话正在连接
+(ios only)通话正在连接
 
 ```javascript
 const handler = (session) => {
@@ -368,7 +380,7 @@ JMRTCViewController.removeListener(handler)
 
 ### Session
 
-```json
+```
 userModel = {
 	type: 'user',
 	username: string,           // 用户名
@@ -392,7 +404,6 @@ session = {
 	inviter: userModel,
 	invitingMembers: [userModel],
 	joinedMembers: [userModel],
-	startTime: number
 }
 ```
 

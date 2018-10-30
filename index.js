@@ -32,10 +32,21 @@ export default class JMRTCViewController {
   }
 
   /**
+   * 获取权限后重新初始化引擎(Android only)。
+   * @param {Function} success = (res) => { }
+   * @param {Function} fail = (error) => { }
+   */
+  static reinitEngine(success, fail) {
+    if (Platform.OS == "android") {
+      JMRTCModule.reinitEngine(success, fail);
+    }
+  }
+
+  /**
    * 释放音视频引擎
    */
   static releaseEngine() {
-    JMRTCModule.releaseEngine()
+    JMRTCModule.releaseEngine();
   }
   
   /**

@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    lintOptions {
+        abortOnError false
+        warning 'InvalidPackage'
+    }
+    sourceSets.main {
+        jniLibs.srcDirs = ['libs']
+        manifest.srcFile 'AndroidManifest.xml'
+        java.srcDirs = ['src']
+        resources.srcDirs = ['src']
+        aidl.srcDirs = ['src']
+        renderscript.srcDirs = ['src']
+        res.srcDirs = ['res']
+        assets.srcDirs = ['assets']
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.facebook.react:react-native:+'
+    compile files('libs/agora-rtc-sdk.jar')
+    compile files('libs/jmrtc-sdk-android-1.0.2.jar')
+    compile files('libs/jmessage-sdk-android-2.7.0.jar')
+}

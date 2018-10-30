@@ -3,7 +3,10 @@ package com.example;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+
 import io.jchat.android.JMessageReactPackage;
+import io.jmrtc.android.JMRTCReactPackage;
+
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -24,7 +27,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new JMessageReactPackage()
+            new JMessageReactPackage(true),
+              new JMRTCReactPackage(true)
+
       );
     }
 

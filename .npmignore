@@ -1,3 +1,6 @@
+## Build generated
+build/
+DerivedData/
 document/
 example/
 node_modules/

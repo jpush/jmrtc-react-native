@@ -29,7 +29,8 @@ export default class App extends Component {
     }
   }
   componentDidMount() {
-    JMessage.init({appkey: '4f7aef34fb361292c566a1cd'})
+    JMessage.setDebugMode({'enable':true})
+    JMessage.init({appkey: '4f7aef34fb361292c566a1cd','isOpenMessageRoaming': true})
     JMessage.getMyInfo((userInfo) => {
       if (userInfo.username) {
         this.setState({isLogin: true, myUsername: userInfo.username})    
@@ -40,13 +41,13 @@ export default class App extends Component {
   }
 
   render() {
-    JMRTCViewController.initEngine( (res) => {
-      console.log(JSON.stringify(res))
-    }, () => {
+    // JMRTCViewController.initEngine( (res) => {
+    //   console.log(JSON.stringify(res))
+    // }, () => {
 
-    });
+    // });
 
-    JMRTCViewController.releaseEngine()
+    // JMRTCViewController.releaseEngine()
     return (
       <View style={styles.container}>
         { this.state.isLogin ?
@@ -54,7 +55,8 @@ export default class App extends Component {
             myUsername={this.state.myUsername}
           />
           :
-          <LoginPage onLoginSuccess = { () => {
+          <LoginPage
+          onLoginSuccess = { () => {
             this.setState(this.setState({isLogin: true}))
           }} />
         }
@@ -67,7 +69,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   welcome: {

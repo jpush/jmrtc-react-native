@@ -18,15 +18,28 @@ import JMessage from 'jmessage-react-plugin'
 
 
 var styles = StyleSheet.create({
-    signin: {
-      marginLeft: 10,
-      marginRight: 10
-    },
-    button: {
-      backgroundColor: '#FF3366',
-      borderColor: '#FF3366'
-    }
-  })
+  signin: {
+    marginLeft: 10,
+    marginRight: 10
+  },
+  button: {
+    backgroundColor: "#FF3366",
+    borderColor: "#FF3366"
+  },
+  inputView: {
+    margin: 10
+  },
+  container: {
+    backgroundColor: "green",
+    width: window.width,
+    flex :1
+  },
+  loginBtn: {
+    color: "#ffffff",
+    height: 30,
+    backgroundColor: "#cccccc"
+  }
+});
   
   export class FormButton extends Component {
       
