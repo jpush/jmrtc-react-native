@@ -57,7 +57,7 @@ public class JMRTCModule extends ReactContextBaseJavaModule {
 
     private Context mContext;
     private JMTRCUtils mJMessageUtils;
-    private HashMap<String, SurfaceView> surfaceViewCache;
+    public static HashMap<String, SurfaceView> surfaceViewCache;
 
     private JMRtcSession session;//通话数据元信息对象
     boolean requestPermissionSended = false;

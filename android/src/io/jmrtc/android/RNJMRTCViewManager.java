@@ -1,6 +1,7 @@
 package io.jmrtc.android;
 
 import android.util.Log;
+import android.view.SurfaceView;
 import android.widget.FrameLayout;
 
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -24,6 +25,11 @@ public class RNJMRTCViewManager extends ViewGroupManager<FrameLayout> {
     @ReactProp(name = "username")
     public void setUsername(final FrameLayout view, String username) {
         Log.i(TAG,"username:"+username);
+        SurfaceView surfaceView = JMRTCModule.surfaceViewCache.get(username);
+        if(surfaceView != null){
+            view.addView(surfaceView);
+        }
+
     }
 
     @Override
