@@ -12,7 +12,7 @@
     "native",
     "jmrtc"
   ],
-  "author": "huminiOS,JoshLipan",
+  "author": "huminiOS",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jpush/jmessage-react-plugin/issues"
