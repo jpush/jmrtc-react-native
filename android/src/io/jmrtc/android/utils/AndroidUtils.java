@@ -1,8 +1,5 @@
 package io.jmrtc.android.utils;
 
-/**
- * Created by josh on 2018/9/14.
- */
 
 import android.app.Activity;
 import android.content.Context;
@@ -37,7 +34,7 @@ public class AndroidUtils {
             Method requestPermissionsMethod = activityClass.getMethod("requestPermissions", String[].class, int.class);
             requestPermissionsMethod.invoke(activity, permissions, 0);
         } else {
-            Toast.makeText(activity, "缺少必要权限，请检查Manifest文件，并在设置中打开对应权限", Toast.LENGTH_LONG).show();
+            Log.w(TAG, "缺少必要权限，请检查Manifest文件，并在设置中打开对应权限");
         }
     }
 }
