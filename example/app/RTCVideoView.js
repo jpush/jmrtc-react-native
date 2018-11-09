@@ -87,7 +87,7 @@ export default class RTCVideoView extends Component {
     },1000)
     return (
         <Modal
-            animationType="slide"
+            animationType={"slide"}
             transparent={true}
             visible={this.props.visible}>
                 <JMRTCView style={styles.callAlertContainer} 

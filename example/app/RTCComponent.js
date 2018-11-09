@@ -45,9 +45,13 @@ export default class RTCComponent extends Component {
 
     // JMRTCViewController.addCallConnectingListener(callback)
 
-    // JMRTCViewController.addCallConnectedListener(callback)
+    JMRTCViewController.addCallConnectedListener(() =>{
+        JMRTCViewController.setVideoView({ username: "0001" });
+    })
 
-    // JMRTCViewController.addCallMemberJoinListener(callback)
+    JMRTCViewController.addCallMemberJoinListener(() => {
+      JMRTCViewController.setVideoView({ username: "0002" });
+    });
 
     // JMRTCViewController.addCallDisconnectListener(callback)
 
@@ -127,54 +131,21 @@ export default class RTCComponent extends Component {
             <FormButton
                 title="视频"
                 onPress={ () => {
-                    if (Platform.OS === "android") {
-                        // JMRTCViewController.reinitEngine(
-                        // res => {
-                        //     console.log(`engine init success ${JSON.stringify(res)}`);
-                            JMRTCViewController.startCallUsers(
-                            { usernames: [this.state.username], type: "video" },
-                            res => {
-                                JMRTCViewController.setVideoView({ username: "0001" });
-                                JMRTCViewController.setVideoView({ username: "0002" });
-                                console.log("targetUsername" + this.props.myUsername);
-                                this.setState({
-                                targetUsername: this.state.username,
-                                isCalling: true
-                                });
-                            },
-                            err => {
-                                console.log(`startCallUsers fail ${JSON.stringify(err)}`);
-                            }
-                            );
-                        // },
-                        // err => {
-                        //     console.log("engine init fail");
-                        // }
-                        // );
-                    }else{
-                        JMRTCViewController.initEngine(res => {
-                            console.log(`engine init success ${JSON.stringify(res)}`);
-                            JMRTCViewController.startCallUsers({ usernames: [this.state.username], type: "video" }, res => {
-                                JMRTCViewController.setVideoView(
-                                  { username: "0001" }
-                                );
-                                JMRTCViewController.setVideoView(
-                                  { username: "0002" }
-                                );
-                                console.log("targetUsername" + this.props.myUsername);
-                                this.setState({
-                                  targetUsername: this
-                                    .state.username,
-                                  isCalling: true
-                                });
-                              }, err => {
-                                console.log(`startCallUsers fail ${JSON.stringify(err)}`);
-                              });
-                          }, err => {
-                            console.log("engine init fail");
-                          });
+                    JMRTCViewController.startCallUsers(
+                    { usernames: [this.state.username], type: "video" },
+                    res => {
+                        JMRTCViewController.setVideoView({ username: "0001" });
+                        JMRTCViewController.setVideoView({ username: "0002" });
+                        console.log("targetUsername" + this.props.myUsername);
+                        this.setState({
+                        targetUsername: this.state.username,
+                        isCalling: true
+                        });
+                    },
+                    err => {
+                        console.log(`startCallUsers fail ${JSON.stringify(err)}`);
                     }
-                    
+                    );                    
 
                 } }
             />
