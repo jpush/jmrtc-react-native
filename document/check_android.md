@@ -1,5 +1,5 @@
 ### Android 配置
-jmrtc-react-native 需要依赖 jmessage-react-native 以及 jcore-react-native才能正常使用
+jmrtc-react-native 需要依赖 jmessage-react-plugin 以及 jcore-react-native才能正常使用
 
 * 检查 app 下的 build.gradle 配置：
 ```
@@ -22,5 +22,5 @@ project(':jcore-react-native').projectDir = new File(rootProject.projectDir, '..
 include ':jmrtc-react-native'
 project(':jmrtc-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/jmrtc-react-native/android')
 ```
-* 现在重新 sync 一下项目，应该能看到 jmessage-react-native ,jmrtc-react-native 以及 jcore-react-native 作为 android Library 项目导进来了。
+* 现在重新 sync 一下项目，应该能看到 jmessage-react-plugin ,jmrtc-react-native 以及 jcore-react-native 作为 android Library 项目导进来了。
 
