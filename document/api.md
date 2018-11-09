@@ -98,7 +98,7 @@ JMRTCViewController.startCallUsers(params, () => {
 ### setVideoView
 
 视频聊天绑定影像视图输出 `JMRTCView` 有 `username` 属性 需要匹配，详情见示例。
-Android 请在收到 [CallConnected](#callconnected) 或者 [CallMemberJoin](#callmemberjoin) 事件后调用此接口
+Android 请在收到 [CallConnected](#callconnected) 或者 [CallMemberJoin](#callmemberjoin) 事件后调用此接口
 
 ```javascript
 const params = {
