@@ -25,7 +25,7 @@ react-native link jmrtc-react-native
 
 * 添加 JMRTCReactPackage
 
-  在 MainApplication 中加上 JMRTCReactPackage ，JMessagePackage 有两个个参数：是否弹出 toast，是否打印插件log
+  在 MainApplication 中加上 JMRTCReactPackage ，JMessagePackage 有两个参数：是否弹出 toast，是否打印插件log
 
   ```
   import io.jmrtc.android.JMRTCReactPackage;;   // <--   导入 JMRTCReactPackage
