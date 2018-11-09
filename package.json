@@ -1,6 +1,6 @@
 {
   "name": "jmrtc-react-native",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "a jmrtc plugin for react native application",
   "main": "index.js",
   "repository": {
@@ -18,7 +18,7 @@
     "url": "https://github.com/jpush/jmessage-react-plugin/issues"
   },
   "peerDependencies": {
-    "jcore-react-native": ">= 1.1.8"
+    "jcore-react-native": ">= 1.2.11"
   },
   "rnpm": {
     "ios": {
@@ -48,6 +48,6 @@
   },
   "homepage": "https://github.com/jpush/jmessage-react-plugin#readme",
   "dependencies": {
-    "jmessage-react-plugin": "^2.3.9"
+    "jmessage-react-plugin": "^2.4.8"
   }
 }
