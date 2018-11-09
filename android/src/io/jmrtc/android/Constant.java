@@ -137,7 +137,7 @@ public class Constant {
     public static final String MEDIA_TYPE = "mediaType";
     public static final String INVITER = "inviter";
     public static final String INVITING_MEMBERS = "invitingMembers";
-    public static final String JOINED_MEMBERS = "joined_Members";
+    public static final String JOINED_MEMBERS = "joinedMembers";
     public static final String START_TIME = "startTime";
     public static final String INVITED_USERS = "invitedUsers";
     public static final String FROM_USER = "fromUser";

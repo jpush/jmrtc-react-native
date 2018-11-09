@@ -42,23 +42,28 @@
 
 ### initEngine
 
-初始化音视频引擎，需要初始化成功回调后只能执行音视频相关操作。
-Android 调用此接口，如果必要权限没有获取到，则会触发权限申请
+初始化音视频引擎，需要初始化成功回调后才能执行音视频相关操作。
+
+Android 如果下面权限没有获取到，则会触发权限申请
+```xml
+android.permission.RECORD_AUDIO
+android.permission.CAMERA
+```
 
 ```javascript
 JMRTCViewController.initEngine(() => {
-  // 音视频引擎初始化成功，想在可以做音视频相关操作。
+  // 音视频引擎初始化成功，现在可以做音视频相关操作。
 }, (error) => {
   
 })
 ```
 ### reinitengine(Android only)
-
+initEngine 只会触发一次动态权限申请，用户拒绝权限申请后开发者需要自行申请权限，
 获取权限成功以后调用此接口重新初始化引擎。
 
 ```javascript
 JMRTCViewController.reinitengine(() => {
-  // 音视频引擎初始化成功，想在可以做音视频相关操作。
+  // 音视频引擎初始化成功，现在可以做音视频相关操作。
 }, (error) => {
   
 })
@@ -93,6 +98,7 @@ JMRTCViewController.startCallUsers(params, () => {
 ### setVideoView
 
 视频聊天绑定影像视图输出 `JMRTCView` 有 `username` 属性 需要匹配，详情见示例。
+Android 请在收到 [CallConnected](#callconnected) 或者 [CallMemberJoin](#callmemberjoin) 事件后调用此接口
 
 ```javascript
 const params = {

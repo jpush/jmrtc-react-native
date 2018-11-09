@@ -10,11 +10,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import io.jmrtc.android.utils.Logger;
+
 public class JMRTCReactPackage implements ReactPackage {
 
     private boolean mShutdownToast;
 
-    public JMRTCReactPackage(boolean shutdownToast) {
+    public JMRTCReactPackage(boolean shutdownToast, boolean shutdownLog) {
+        Logger.SHUTDOWNTOAST = shutdownToast;
+        Logger.SHUTDOWNLOG = shutdownLog;
         mShutdownToast = shutdownToast;
     }
 
@@ -33,6 +37,6 @@ public class JMRTCReactPackage implements ReactPackage {
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         List<ViewManager> viewManagers = new ArrayList<>();
         viewManagers.add(new RNJMRTCViewManager());
-        return  viewManagers;
+        return viewManagers;
     }
 }

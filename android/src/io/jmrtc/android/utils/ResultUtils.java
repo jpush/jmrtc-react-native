@@ -9,9 +9,7 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
-import com.google.gson.jpush.JsonElement;
-import com.google.gson.jpush.JsonObject;
-import com.google.gson.jpush.JsonParser;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +21,9 @@ import java.util.Map;
 
 import cn.jiguang.jmrtc.api.JMRtcSession;
 import cn.jiguang.jmrtc.api.JMSignalingMessage;
+import cn.jmessage.support.google.gson.JsonElement;
+import cn.jmessage.support.google.gson.JsonObject;
+import cn.jmessage.support.google.gson.JsonParser;
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.callback.RequestCallback;
 import cn.jpush.im.android.api.content.CustomContent;
@@ -98,6 +99,12 @@ public class ResultUtils {
                 }
             }
         });
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return result ;
     }
 
