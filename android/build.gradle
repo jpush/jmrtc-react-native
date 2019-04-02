@@ -31,7 +31,10 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.facebook.react:react-native:+'
-    compile 'org.greenrobot:eventbus:3.1.1'
+    //compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.facebook.react:react-native:+'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    compileOnly files('libs/jmessage-sdk-android-2.7.1.jar')
+    implementation files('libs/agora-rtc-sdk.jar')
+    implementation files('libs/jmrtc-sdk-android-1.0.2.jar')
 }
