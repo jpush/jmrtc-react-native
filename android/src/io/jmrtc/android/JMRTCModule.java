@@ -298,14 +298,24 @@ public class JMRTCModule extends ReactContextBaseJavaModule implements Lifecycle
     @ReactMethod
     public void inviteUsers(ReadableMap map, final Callback success, final Callback fail) {
         try {
-            ReadableArray array = map.getArray(Constant.USERNAMES);
+            final ReadableArray array = map.getArray(Constant.USERNAMES);
             final List<UserInfo> userInfos = new ArrayList<>();
+            final int[] cnt = {0};
             for (int i = 0; i < array.size(); i++) {
                 JMessageClient.getUserInfo(array.getString(i), new GetUserInfoCallback() {
                     @Override
                     public void gotResult(int status, String desc, UserInfo userInfo) {
+                        ++cnt[0];
                         if (status == 0) {
                             userInfos.add(userInfo);
+                            if (cnt[0] == array.size()) {
+                                JMRtcClient.getInstance().invite(userInfos, new BasicCallback() {
+                                    @Override
+                                    public void gotResult(int status, String desc) {
+                                        mJMessageUtils.handleCallback(status, desc, success, fail);
+                                    }
+                                });
+                            }
                         } else {
                             mJMessageUtils.handleError(fail, status, desc);
                         }
@@ -313,12 +323,7 @@ public class JMRTCModule extends ReactContextBaseJavaModule implements Lifecycle
                 });
             }
 
-            JMRtcClient.getInstance().invite(userInfos, new BasicCallback() {
-                @Override
-                public void gotResult(int status, String desc) {
-                    mJMessageUtils.handleCallback(status, desc, success, fail);
-                }
-            });
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -331,7 +336,7 @@ public class JMRTCModule extends ReactContextBaseJavaModule implements Lifecycle
     public void setIsMuted(ReadableMap map) {
         try {
             boolean muted = map.getBoolean(Constant.MUTED);
-            JMRtcClient.getInstance().enableAudio(muted);
+            JMRtcClient.getInstance().enableAudio(!muted);
         } catch (Exception e) {
             e.printStackTrace();
             Logger.d(TAG, ERR_MSG_PARAMETER);
@@ -374,8 +379,7 @@ public class JMRTCModule extends ReactContextBaseJavaModule implements Lifecycle
         public void onCallOutgoing(JMRtcSession callSession) {// 通话已播出
             super.onCallOutgoing(callSession);
             Logger.d(TAG, "onCallOutgoing invoked!. session = " + callSession);
-            WritableMap map = Arguments.createMap();
-            map.putMap(Constant.SESSION, ResultUtils.toJSObject(callSession));
+            WritableMap map = ResultUtils.toJSObject(callSession);
             getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                     .emit(CALL_OUT_GOING, map);
             session = callSession;
@@ -385,8 +389,7 @@ public class JMRTCModule extends ReactContextBaseJavaModule implements Lifecycle
         public void onCallInviteReceived(JMRtcSession callSession) {// 收到通话邀请
             super.onCallInviteReceived(callSession);
             Logger.d(TAG, "onCallInviteReceived invoked!. session = " + callSession);
-            WritableMap map = Arguments.createMap();
-            map.putMap(Constant.SESSION, ResultUtils.toJSObject(callSession));
+            WritableMap map = ResultUtils.toJSObject(callSession);
             getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                     .emit(CALL_RECEIVE_INVITE, map);
             session = callSession;
@@ -410,11 +413,10 @@ public class JMRTCModule extends ReactContextBaseJavaModule implements Lifecycle
         public void onCallConnected(JMRtcSession callSession, SurfaceView localSurfaceView) {//通话连接已建立
             super.onCallConnected(callSession, localSurfaceView);
             Logger.d(TAG, "onCallConnected invoked!. session = " + callSession + " localSerfaceView = " + localSurfaceView);
-            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
             localSurfaceView.setLayoutParams(layoutParams);
             surfaceViewCache.put(JMessageClient.getMyInfo().getUserName(), localSurfaceView);
-            WritableMap map = Arguments.createMap();
-            map.putMap(Constant.SESSION, ResultUtils.toJSObject(callSession));
+            WritableMap map = ResultUtils.toJSObject(callSession);
             getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                     .emit(CALL_CONNECTED, map);
             session = callSession;
@@ -426,11 +428,10 @@ public class JMRTCModule extends ReactContextBaseJavaModule implements Lifecycle
         public void onCallMemberJoin(UserInfo joinedUserInfo, SurfaceView remoteSurfaceView) {//有其他人加入通话
             super.onCallMemberJoin(joinedUserInfo, remoteSurfaceView);
             Logger.d(TAG, "onCallMemberJoin invoked!. joined user  = " + joinedUserInfo + " remoteSerfaceView = " + remoteSurfaceView);
-            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
             remoteSurfaceView.setLayoutParams(layoutParams);
             surfaceViewCache.put(joinedUserInfo.getUserName(), remoteSurfaceView);
-            WritableMap map = Arguments.createMap();
-            map.putMap(Constant.USER_INFO, ResultUtils.toJSObject(joinedUserInfo));
+            WritableMap map = ResultUtils.toJSObject(joinedUserInfo);
             getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                     .emit(CALL_MEMBER_JOIN, map);
         }
@@ -457,7 +458,7 @@ public class JMRTCModule extends ReactContextBaseJavaModule implements Lifecycle
             }
 
             WritableMap map = Arguments.createMap();
-            map.putMap(Constant.USER_INFO, ResultUtils.toJSObject(leavedUserInfo));
+            map.putMap(Constant.USER, ResultUtils.toJSObject(leavedUserInfo));
             map.putString(Constant.REASON, reason.toString());
             getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                     .emit(CALL_MEMBER_LEAVE, map);
@@ -481,8 +482,7 @@ public class JMRTCModule extends ReactContextBaseJavaModule implements Lifecycle
         public void onCallError(int errorCode, String desc) {//通话发生错误
             super.onCallError(errorCode, desc);
             Logger.d(TAG, "onCallError invoked!. errCode = " + errorCode + " desc = " + desc);
-            WritableMap map = Arguments.createMap();
-            map.putMap(Constant.SESSION, ResultUtils.toJSObject(session));
+            WritableMap map = ResultUtils.toJSObject(session);
             getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                     .emit(CALL_ERROR, map);
             session = null;
@@ -492,8 +492,7 @@ public class JMRTCModule extends ReactContextBaseJavaModule implements Lifecycle
         public void onRemoteVideoMuted(UserInfo remoteUser, boolean isMuted) {
             super.onRemoteVideoMuted(remoteUser, isMuted);
             Logger.d(TAG, "onRemoteVideoMuted invoked!. remote user = " + remoteUser + " isMuted = " + isMuted);
-            WritableMap map = Arguments.createMap();
-            map.putMap(Constant.USER_INFO, ResultUtils.toJSObject(remoteUser));
+            WritableMap map = ResultUtils.toJSObject(remoteUser);
             map.putBoolean(Constant.ENABLE, isMuted);
             getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                     .emit(CALL_USER_VIDEOSTREAM_ENABLED, map);

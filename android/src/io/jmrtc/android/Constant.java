@@ -132,7 +132,7 @@ public class Constant {
     public static final String SPEAKERPHONE_ENABLED = "speakerphoneEnabled";
     public static final String VIDEO_STREAM_ENABLED = "videoStreamEnabled";
     public static final String SESSION = "session";
-    public static final String USER_INFO = "userInfo";
+    public static final String USER = "user";
     public static final String CHANNEL_ID = "channelId";
     public static final String MEDIA_TYPE = "mediaType";
     public static final String INVITER = "inviter";
