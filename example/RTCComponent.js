@@ -12,14 +12,15 @@ import {
   Alert,
   Platform
 } from 'react-native';
-import {  JMRTCViewController} from 'jmrtc-react-native'
+import {  JMRTCViewController} from 'jmrtc-react-native-ys'
 import {FormButton} from './LoginPage'
 
 import CallAlert from './CallAlert'
 import RTCVideoView from './RTCVideoView'
 export default class RTCComponent extends Component {
 
-    // callStatues =  'none' | calling
+    isMuted = false;
+
   constructor(props) {
     super(props)
     this.state = {
@@ -30,37 +31,75 @@ export default class RTCComponent extends Component {
         targetUsername: '',
         myUsername: '',
     }
-    
+
   }
 
-  componentDidMount() {
+  startCallUser(){
+    JMRTCViewController.releaseEngine()
+    JMRTCViewController.initEngine( (res) => {
+        console.log('initEngine ' + JSON.stringify(res))
 
+        JMRTCViewController.startCallUsers(
+            { usernames: [this.state.username], type: "video" },
+            res => {
+                console.log("rtccomponent username" + this.props.myUsername + "targetUsername" + this.state.username);
+                this.setState({
+                targetUsername: this.state.username,
+                isCalling: true
+                });
+            },
+            err => {
+                console.log(`startCallUsers fail ${JSON.stringify(err)}`);
+            }
+            );                    
 
+    }, () => {
+        console.log('initEngine ' + JSON.stringify(res))
+    });
+  }
 
+  componentDidMount() {    
     // JMRTCViewController.addCallOutgoingListener()
+
+    JMRTCViewController.releaseEngine()
+    JMRTCViewController.initEngine( (res) => {
+        console.log('initEngine ' + JSON.stringify(res))
+    }, () => {
+        console.log('initEngine ' + JSON.stringify(res))
+    });
     
     JMRTCViewController.addCallReceiveInviteListener((inviteArr) => {
+        console.log('addCallReceiveInviteListener' + JSON.stringify(inviteArr));
+        this.setState({targetUsername: inviteArr.joinedMembers[0].username});
         this.setState({isBeCalling: true})
     })
 
     // JMRTCViewController.addCallConnectingListener(callback)
 
     JMRTCViewController.addCallConnectedListener(() =>{
-        JMRTCViewController.setVideoView({ username: "0001" });
+        console.log('addCallConnectedListener');
+        setTimeout(() => {
+            JMRTCViewController.setVideoView({ username: this.props.myUsername });    
+        }, 1000);
+        
     })
 
-    JMRTCViewController.addCallMemberJoinListener(() => {
-      JMRTCViewController.setVideoView({ username: "0002" });
+    JMRTCViewController.addCallMemberJoinListener((map) => {
+        console.log('addCallMemberJoinListener ' + JSON.stringify(map));
+        JMRTCViewController.setVideoView({ username: map.username });      
     });
 
-    // JMRTCViewController.addCallDisconnectListener(callback)
+    JMRTCViewController.addCallDisconnectListener(() => {
+        console.log('addCallDisconnectListener ');
+        this.setState({isCalling: false, isBeCalling: false})  
+    })
 
     JMRTCViewController.addCallMemberLeaveListener( () => {
         JMRTCViewController.hangup(() => {
-            this.setState({isCalling: false})  
+            this.setState({isCalling: false, isBeCalling: false})  
               
         }, () => {
-            this.setState({ isCalling: false });  
+            this.setState({ isCalling: false ,isBeCalling: false});  
             Alert.alert('hangup', 'error')
         })
         
@@ -71,11 +110,7 @@ export default class RTCComponent extends Component {
     // JMRTCViewController.addCallErrorListener(callback)
 
     // JMRTCViewController.addCallUserVideoStreamEnabledListener(callback)
-    JMRTCViewController.initEngine( (res) => {
-      console.log(JSON.stringify(res))
-    }, () => {
-
-    });
+    
   }
 
   render() {
@@ -110,9 +145,11 @@ export default class RTCComponent extends Component {
                 JMRTCViewController.switchCamera()
             } }
             onClickMute={ () => {
-                JMRTCViewController.isMuted((res) => {
-                    JMRTCViewController.setIsMuted({muted: !res})
-                })
+                // JMRTCViewController.isMuted((res) => {
+                    console.log("muted:" + this.isMuted);
+                    this.isMuted = !this.isMuted;
+                    JMRTCViewController.setIsMuted({muted: this.isMuted})
+                // })
             } }
             onClickHangoff={ () => {
                 JMRTCViewController.hangup(() => {
@@ -131,33 +168,21 @@ export default class RTCComponent extends Component {
             <FormButton
                 title="视频"
                 onPress={ () => {
-                    JMRTCViewController.startCallUsers(
-                    { usernames: [this.state.username], type: "video" },
-                    res => {
-                        JMRTCViewController.setVideoView({ username: "0001" });
-                        JMRTCViewController.setVideoView({ username: "0002" });
-                        console.log("targetUsername" + this.props.myUsername);
-                        this.setState({
-                        targetUsername: this.state.username,
-                        isCalling: true
-                        });
-                    },
-                    err => {
-                        console.log(`startCallUsers fail ${JSON.stringify(err)}`);
-                    }
-                    );                    
-
+                    this.startCallUser()
                 } }
             />
 
             <FormButton
                 title="音频"
                 onPress={ () => {
-                    JMRTCViewController.startCallUsers({usernames: [this.state.username], type: 'voice'}, (res) => {
-                        console.log(`startCallUsers success ${JSON.stringify(res)}`)
-                    }, (err) => {
-                        console.log(`startCallUsers success ${JSON.stringify(err)}`)
-                    })
+                    this.setState({
+                        isCalling: true
+                        });
+                    // JMRTCViewController.startCallUsers({usernames: [this.state.username], type: 'voice'}, (res) => {
+                    //     console.log(`startCallUsers success ${JSON.stringify(res)}`)
+                    // }, (err) => {
+                    //     console.log(`startCallUsers success ${JSON.stringify(err)}`)
+                    // })
                 } }
             />
         </View>

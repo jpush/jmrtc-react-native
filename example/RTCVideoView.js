@@ -11,16 +11,15 @@ import {
 import PropTypes from 'prop-types';
 import IconButton from './IconButton'
 
-import {  JMRTCViewController,JMRTCView} from 'jmrtc-react-native'
+import {  JMRTCViewController,JMRTCView} from 'jmrtc-react-native-ys'
 
 
 const styles = StyleSheet.create({
     callAlertContainer: {
-        flex: 1,
-        alignItems: 'center',
-        backgroundColor: '#3E4650',
-        justifyContent: 'flex-end',
-        zIndex: 1000
+        width:'100%',
+        height:'100%',
+        backgroundColor: '#FF0000',
+        position: 'absolute',
     },
     backgroundVideo: {
         position: 'absolute',
@@ -29,31 +28,33 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(52, 52, 52, 0.8)',
     },
     switchCamera: {
-        position: 'absolute',
         left: 20,
-        top: 20,
+        top: 50,
         width: 28,
         height: 28,
     },
     subVideoContainer: {
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        justifyContent: 'flex-end',
+        top: '50%',
         width: '100%',
+        height: 200,
     },
     subVideo: {
-        height: 200,
+        position: 'absolute',
+        right: 0,
+        height: '100%',
         width: 160,
-        margin: 20,
-        backgroundColor: '#2E3640',
+        backgroundColor: '#FFFF00',
     },
     buttonContainer: {
+        position: 'absolute',
+        width: '100%',
+        backgroundColor: 'rgba(52, 52, 52, 0.8)',
         flexDirection: 'row',
         alignItems: 'flex-end',
-        marginBottom: 60,
-        // justifyContent: 'center',// ?
+        top: '85%',
+        justifyContent: 'center',// ?
     },
-    hangoffBtn: {
+    hangoffBtn: { 
         width: 60,
         height: 60,
         margin: 10,
@@ -81,29 +82,26 @@ export default class RTCVideoView extends Component {
   }
   render() {
     console.log(`video view render this.props.targetUsername ${this.props.targetUsername}   this.props.myUsername ${this.props.myUsername}`)
-    setTimeout(() => {
-        JMRTCViewController.setVideoView({username: '0001'})
-        JMRTCViewController.setVideoView({username: '0002'})
-    },1000)
-    return (
+    return ( 
         <Modal
             animationType={"slide"}
             transparent={true}
             visible={this.props.visible}>
+
+            <View style={{flex: 1, backgroundColor: 'powderblue'}}>
                 <JMRTCView style={styles.callAlertContainer} 
-                    username={this.props.targetUsername}>
-                        <IconButton style={styles.switchCamera} onPress={this.props.onClickSwitch} icon={require('./resource/switch.png')}/>
-                    
-                        <View style={styles.subVideoContainer}>
-                            <JMRTCView style={styles.subVideo}
-                                username={this.props.myUsername}>
-                            </JMRTCView>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <IconButton style={styles.muteBtn} onPress={this.props.onClickMute} icon={require('./resource/mute.png')}/>
-                            <IconButton style={styles.hangoffBtn} onPress={this.props.onClickHangoff} icon={require('./resource/hangoff.png')}/>
-                        </View>
-                </JMRTCView>
+                            username={this.props.targetUsername} />
+                <IconButton style={styles.switchCamera} onPress={this.props.onClickSwitch} icon={require('./resource/switch.png')}/>
+
+                <View style={styles.subVideoContainer}>
+                <JMRTCView style={styles.subVideo} username={this.props.myUsername}/>    
+                </View>
+                
+                <View style={styles.buttonContainer}>
+                    <IconButton style={styles.muteBtn} onPress={this.props.onClickMute} icon={require('./resource/mute.png')}/>
+                    <IconButton style={styles.hangoffBtn} onPress={this.props.onClickHangoff} icon={require('./resource/hangoff.png')}/>
+                </View> 
+            </View>
         </Modal>
       )
   }

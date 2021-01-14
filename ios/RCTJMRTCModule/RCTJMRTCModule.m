@@ -115,7 +115,7 @@ RCT_EXPORT_METHOD(initEngine:(RCTResponseSenderBlock)successCallback
             return;
         }
         
-        successCallback(@[@{@"fds": @"fsfsf"}]);
+        successCallback(@[]);
     }];
 }
 

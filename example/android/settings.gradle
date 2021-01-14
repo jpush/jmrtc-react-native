@@ -1,7 +1,5 @@
 rootProject.name = 'example'
-include ':jmessage-react-plugin'
-project(':jmessage-react-plugin').projectDir = new File(rootProject.projectDir, '../node_modules/jmessage-react-plugin/android')
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':jcore-react-native'
 project(':jcore-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/jcore-react-native/android')
-include ':app' ,':jmrtc-react-native'
-project(':jmrtc-react-native').projectDir = new File(rootProject.projectDir, '../../android')
+include ':app'
