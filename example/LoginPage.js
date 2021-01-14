@@ -89,7 +89,7 @@ export default class LoginPage extends Component {
 
     onPress() {
 
-        JMessage.login({username: this.state.username, password: this.state.password}, () => {
+        JMessage.login({username: "ys003", password: "123456"}, () => {
             Alert.alert('login success')
             this.props.onLoginSuccess()
         }, (error) => {
@@ -98,7 +98,7 @@ export default class LoginPage extends Component {
     }
 
     register() {
-        JMessage.register({username: this.state.username, password: this.state.password}, () => {
+        JMessage.register({username: "ys003", password: "123456"}, () => {
             Alert.alert('register success')
         }, (error) => {
             Alert.alert('register fail', JSON.stringify(error))
@@ -127,24 +127,24 @@ export default class LoginPage extends Component {
                 <Button
                     style={{width: 100, height: 20, position: "absolute", left: 0, top: 1000}}
                     onPress={this.register}
-                    title="注册">
+                    title="注册111">
                 </Button>
         </View>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    inputView: {
-        margin: 10,
-    },
-    loginBtn: {
-        color: "#ffffff",
-        height: 30,
-        backgroundColor: "#cccccc",
-    },
-    button: {
-        backgroundColor: '#FF3366',
-        borderColor: '#FF3366'
-    },
-});
+// const styles = StyleSheet.create({
+//     inputView: {
+//         margin: 10,
+//     },
+//     loginBtn: {
+//         color: "#ffffff",
+//         height: 30,
+//         backgroundColor: "#cccccc",
+//     },
+//     button: {
+//         backgroundColor: '#FF3366',
+//         borderColor: '#FF3366'
+//     },
+// });

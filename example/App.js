@@ -13,7 +13,7 @@ import {
   Modal,
   Keyboard
 } from 'react-native';
-import {  JMRTCViewController,JMRTCView} from 'jmrtc-react-native'
+import {  JMRTCViewController,JMRTCView} from 'jmrtc-react-native-ys'
 import JMessage from 'jmessage-react-plugin'
 
 import LoginPage from './LoginPage'
@@ -41,13 +41,6 @@ export default class App extends Component {
   }
 
   render() {
-    // JMRTCViewController.initEngine( (res) => {
-    //   console.log(JSON.stringify(res))
-    // }, () => {
-
-    // });
-
-    // JMRTCViewController.releaseEngine()
     return (
       <View style={styles.container}>
         { this.state.isLogin ?
