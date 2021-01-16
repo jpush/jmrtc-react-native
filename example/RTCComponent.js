@@ -12,7 +12,7 @@ import {
   Alert,
   Platform
 } from 'react-native';
-import {  JMRTCViewController} from 'jmrtc-react-native-ys'
+import {  JMRTCViewController} from 'jmrtc-react-native'
 import {FormButton} from './LoginPage'
 
 import CallAlert from './CallAlert'
