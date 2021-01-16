@@ -11,7 +11,7 @@ import {
 import PropTypes from 'prop-types';
 import IconButton from './IconButton'
 
-import {  JMRTCViewController,JMRTCView} from 'jmrtc-react-native-ys'
+import {  JMRTCViewController,JMRTCView} from 'jmrtc-react-native'
 
 
 const styles = StyleSheet.create({
