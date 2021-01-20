@@ -89,7 +89,7 @@ export default class LoginPage extends Component {
 
     onPress() {
 
-        JMessage.login({username: "ys003", password: "123456"}, () => {
+        JMessage.login({username: this.state.username, password:this.state.password}, () => {
             Alert.alert('login success')
             this.props.onLoginSuccess()
         }, (error) => {
@@ -98,7 +98,7 @@ export default class LoginPage extends Component {
     }
 
     register() {
-        JMessage.register({username: "ys003", password: "123456"}, () => {
+        JMessage.register({username: this.state.username, password: this.state.password}, () => {
             Alert.alert('register success')
         }, (error) => {
             Alert.alert('register fail', JSON.stringify(error))
