@@ -3155,9 +3155,9 @@ getpass@^0.1.1:
     assert-plus "^1.0.0"
 
 glob-parent@^5.0.0:
-  version "5.1.1"
-  resolved "https://registry.npmjs.org/glob-parent/-/glob-parent-5.1.1.tgz#b6c1ef417c4e5663ea498f1c45afac6916bbc229"
-  integrity sha512-FnI+VGOpnlGHWZxthPGR+QhR78fuiK0sNLkHQv+bL9fQi57lNNdquIbna/WrfROrolq8GK5Ek6BiMwqL/voRYQ==
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
+  integrity sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==
   dependencies:
     is-glob "^4.0.1"
 
@@ -3536,7 +3536,7 @@ is-extendable@^1.0.1:
 
 is-extglob@^2.1.1:
   version "2.1.1"
-  resolved "https://registry.npmjs.org/is-extglob/-/is-extglob-2.1.1.tgz#a88c02535791f02ed37c76a1b9ea9773c833f8c2"
+  resolved "https://registry.yarnpkg.com/is-extglob/-/is-extglob-2.1.1.tgz#a88c02535791f02ed37c76a1b9ea9773c833f8c2"
   integrity sha1-qIwCU1eR8C7TfHahueqXc8gz+MI=
 
 is-fullwidth-code-point@^2.0.0:
@@ -3556,7 +3556,7 @@ is-generator-fn@^2.0.0:
 
 is-glob@^4.0.0, is-glob@^4.0.1:
   version "4.0.1"
-  resolved "https://registry.npmjs.org/is-glob/-/is-glob-4.0.1.tgz#7567dbe9f2f5e2467bc77ab83c4a29482407a5dc"
+  resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-4.0.1.tgz#7567dbe9f2f5e2467bc77ab83c4a29482407a5dc"
   integrity sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==
   dependencies:
     is-extglob "^2.1.1"
@@ -3716,6 +3716,11 @@ istanbul-reports@^3.0.2:
   dependencies:
     html-escaper "^2.0.0"
     istanbul-lib-report "^3.0.0"
+
+jcore-react-native@>=1.3.1, jcore-react-native@^1.2.11, jcore-react-native@^1.9.1:
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/jcore-react-native/-/jcore-react-native-1.9.2.tgz#a4e75fb61984eee2e8db6239124ee7ca28afafaf"
+  integrity sha512-evl7uciNGdxdYBr9CbqR0BIqiVvcFc+0TCQ3wUTnYcHJWZXUbBpyVXeVGB3ZI3ihHm2WdxA24P9iVdVJ9X+1Ig==
 
 jest-changed-files@^26.6.2:
   version "26.6.2"
@@ -4182,6 +4187,27 @@ jetifier@^1.6.2:
   version "1.6.6"
   resolved "https://registry.npmjs.org/jetifier/-/jetifier-1.6.6.tgz#fec8bff76121444c12dc38d2dad6767c421dab68"
   integrity sha512-JNAkmPeB/GS2tCRqUzRPsTOHpGDah7xP18vGJfIjZC+W2sxEHbxgJxetIjIqhjQ3yYbYNEELkM/spKLtwoOSUQ==
+
+jmessage-react-plugin@^2.4.8:
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/jmessage-react-plugin/-/jmessage-react-plugin-2.5.3.tgz#c4c6b0691681aae6256ef2cb9e3db6437eadc7a9"
+  integrity sha512-1wXZu0wvSD+Xox/AKay9t9r2XEce2nuuA0EpVhAl6+II9X7LA6ZCYnIK51K/7XCUZk1aE4qVLuc1Jb9nv9KRSA==
+  dependencies:
+    jcore-react-native "^1.2.11"
+
+jmessage-react-plugin@^3.1.8:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/jmessage-react-plugin/-/jmessage-react-plugin-3.2.0.tgz#e2d4fb0ecfb005c9f174b1f6f1ee03401e2d9680"
+  integrity sha512-h98yocSKCxL9C5tvPFXQUk7QwHVjhH4pzyXYHS6qHIZCHWO8pUrXahMvYdJs9xsxdwJIA7Mw+UlCeYrw8/fSxg==
+  dependencies:
+    jcore-react-native ">=1.3.1"
+
+jmrtc-react-native@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/jmrtc-react-native/-/jmrtc-react-native-1.3.0.tgz#588a1bc10cda08acc51159eb3b2ef85c61af2422"
+  integrity sha512-feB6F3pcRjx09/7HGXta8OCSr6f6FI3myLb351MGxbk4D0lZQAY4B3Rq14PYoQ5D0A5YJyhaKkmuATspW1S6wQ==
+  dependencies:
+    jmessage-react-plugin "^2.4.8"
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
